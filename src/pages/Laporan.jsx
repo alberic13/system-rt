@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   BarChart3,
   Printer,
@@ -17,14 +17,14 @@ export default function Laporan() {
   const [selectedBulan, setSelectedBulan] = useState(new Date().getMonth() + 1);
   const [selectedTahun, setSelectedTahun] = useState(2026);
 
-  useEffect(() => {
-    loadLaporan();
-  }, [selectedBulan, selectedTahun]);
-
-  const loadLaporan = () => {
+  const loadLaporan = useCallback(() => {
     const data = StorageService.getLaporan(selectedTahun, selectedBulan);
     setLaporanData(data);
-  };
+  }, [selectedTahun, selectedBulan]);
+
+  useEffect(() => {
+    loadLaporan();
+  }, [loadLaporan]);
 
   const handlePrint = () => {
     window.print();

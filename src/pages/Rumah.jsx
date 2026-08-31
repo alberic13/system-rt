@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
   Building2,
   Home,
-  UserCheck,
-  UserX,
   History,
   Edit3,
   X,
-  CheckCircle2,
-  Users,
   Search,
   Trash2,
   Calendar,
@@ -17,8 +13,7 @@ import {
   LayoutGrid,
   List,
   Phone,
-  Info,
-  User
+  Info
 } from 'lucide-react';
 import { StorageService } from '../services/storage';
 
@@ -44,11 +39,14 @@ export default function Rumah() {
   const [historyHouse, setHistoryHouse] = useState(null);
   const [historyList, setHistoryList] = useState([]);
 
-  useEffect(() => {
-    loadData();
-  }, [filterHuni]);
+  const handleOpenHistory = useCallback((r) => {
+    setHistoryHouse(r);
+    const hist = StorageService.getRiwayatByRumahId(r.id);
+    setHistoryList(hist);
+    setShowHistoryModal(true);
+  }, []);
 
-  const loadData = () => {
+  const loadData = useCallback(() => {
     const listR = StorageService.getRumah();
     const listP = StorageService.getPenghuni();
     setRumahList(listR);
@@ -58,7 +56,11 @@ export default function Rumah() {
       const target = listR.find(r => r.id === Number(selectedHouseId));
       if (target) handleOpenHistory(target);
     }
-  };
+  }, [selectedHouseId, handleOpenHistory]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const handleOpenAssign = (r) => {
     setTargetRumah(r);
@@ -83,13 +85,6 @@ export default function Rumah() {
 
     setShowAssignModal(false);
     loadData();
-  };
-
-  const handleOpenHistory = (r) => {
-    setHistoryHouse(r);
-    const hist = StorageService.getRiwayatByRumahId(r.id);
-    setHistoryList(hist);
-    setShowHistoryModal(true);
   };
 
   const refreshHistory = (houseId) => {

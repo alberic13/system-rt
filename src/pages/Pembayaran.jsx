@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   CreditCard,
   PlusCircle,
   Search,
   CheckCircle2,
   XCircle,
-  Calendar,
   X
 } from 'lucide-react';
 import { StorageService } from '../services/storage';
@@ -18,7 +17,6 @@ const namaBulanList = [
 export default function Pembayaran() {
   const [pembayaranList, setPembayaranList] = useState([]);
   const [rumahList, setRumahList] = useState([]);
-  const [penghuniList, setPenghuniList] = useState([]);
 
   const [selectedBulan, setSelectedBulan] = useState(new Date().getMonth() + 1);
   const [selectedTahun, setSelectedTahun] = useState(2026);
@@ -36,18 +34,16 @@ export default function Pembayaran() {
     catatan: '',
   });
 
-  useEffect(() => {
-    loadData();
-  }, [selectedBulan, selectedTahun, filterJenis]);
-
-  const loadData = () => {
+  const loadData = useCallback(() => {
     const listP = StorageService.getPembayaran(selectedBulan, selectedTahun, filterJenis);
     const listR = StorageService.getRumah();
-    const listPenghuni = StorageService.getPenghuni();
     setPembayaranList(listP);
     setRumahList(listR);
-    setPenghuniList(listPenghuni);
-  };
+  }, [selectedBulan, selectedTahun, filterJenis]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const handleOpenModal = () => {
     setFormData({
@@ -145,6 +141,18 @@ export default function Pembayaran() {
         </div>
 
         <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+          <div className="flex items-center gap-2">
+            <label className="text-xs font-semibold text-slate-500">Tahun:</label>
+            <select
+              value={selectedTahun}
+              onChange={(e) => setSelectedTahun(Number(e.target.value))}
+              className="bg-slate-50 border border-slate-300/80 text-slate-800 text-xs rounded-xl px-3 py-1.5 focus:ring-2 focus:ring-slate-900 outline-none font-semibold"
+            >
+              <option value={2026}>2026</option>
+              <option value={2025}>2025</option>
+            </select>
+          </div>
+
           <div className="flex items-center gap-2">
             <label className="text-xs font-semibold text-slate-500">Bulan:</label>
             <select

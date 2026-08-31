@@ -1,6 +1,18 @@
 # System-RT — Aplikasi Manajemen Administrasi & Keuangan RT (Vite + React SPA)
 
+<div align="left">
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-system--rt--zalde.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://system-rt-zalde.vercel.app/)
+[![CI Pipeline](https://img.shields.io/github/actions/workflow/status/alberic13/system-rt/ci.yml?branch=main&label=CI%20Pipeline&style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/alberic13/system-rt/actions/workflows/ci.yml)
+[![Lint Status](https://img.shields.io/badge/Oxlint-0%20Warnings%20%7C%200%20Errors-10b981?style=for-the-badge&logo=oxlint&logoColor=white)](https://github.com/alberic13/system-rt)
+[![React 19](https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4.3-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+
+</div>
+
 Aplikasi web modern Single Page Application (SPA) berbasis **Vite**, **React 19 (JSX)**, **Tailwind CSS v4**, **React Router DOM**, dan **LocalStorage Data Engine**.
+
+🌐 **Live Demo URL**: [https://system-rt-zalde.vercel.app/](https://system-rt-zalde.vercel.app/)
 
 ---
 
@@ -153,9 +165,12 @@ Buka browser di: `http://localhost:5173` atau port aktif yang ditampilkan.
 
 ---
 
-## 🧪 Verifikasi & Kualitas Kode
+## 🧪 Verifikasi & Kualitas Kode (CI/CD & Testing)
 
-- **Build Production**: ✅ `npm run build` sukses dalam **1.34s** tanpa error.
-- **Browser Runtime Testing**: Pengujian langsung via Chrome DevTools MCP menunjukkan **0 JS console error**, 0 exception, dan navigasi 6 rute aman.
-- **Clean Code**: Bebas dari unused imports, penamaan yang jelas, dan arsitektur `StorageService` yang modular.
-
+| Item Pengujian | Status | Rincian / Hasil Verifikasi |
+| :--- | :---: | :--- |
+| **Linting Test (Oxlint)** | ✅ **Passed** | `0 errors`, `0 warnings` pada 11 files (92 rules). Bebas dari dead code & missing hooks dependencies. |
+| **Build Production (Vite)** | ✅ **Passed** | Bundle terkompilasi dalam **984ms** tanpa error bundling. |
+| **CI/CD Pipeline** | ✅ **Active** | GitHub Actions Workflow (`.github/workflows/ci.yml`) otomatis memvalidasi lint & build di setiap push/PR. |
+| **Live Deployment** | ✅ **Online** | [system-rt-zalde.vercel.app](https://system-rt-zalde.vercel.app/) |
+| **Runtime Browser Test** | ✅ **Passed** | 0 JS console errors & 0 runtime exception pada seluruh 6 rute navigasi. |

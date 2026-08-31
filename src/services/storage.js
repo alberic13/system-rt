@@ -475,7 +475,7 @@ export const StorageService = {
   },
 
   // PEMBAYARAN
-  getPembayaran: (bulan, tahun) => {
+  getPembayaran: (bulan, tahun, jenisFilter) => {
     let list = JSON.parse(localStorage.getItem(STORAGE_KEYS.PEMBAYARAN) || '[]');
     const rumahList = JSON.parse(localStorage.getItem(STORAGE_KEYS.RUMAH) || '[]');
     const penghuniList = JSON.parse(localStorage.getItem(STORAGE_KEYS.PENGHUNI) || '[]');
@@ -544,12 +544,28 @@ export const StorageService = {
     let filtered = validList;
     if (bulan && bulan !== 'All') filtered = filtered.filter(p => p.bulan === Number(bulan));
     if (tahun) filtered = filtered.filter(p => p.tahun === Number(tahun));
+    if (jenisFilter && jenisFilter !== 'All') filtered = filtered.filter(p => p.jenis_iuran === jenisFilter);
 
     return filtered.map(p => ({
       ...p,
       rumah: rumahList.find(r => r.id === p.rumah_id) || null,
       penghuni: penghuniList.find(pen => pen.id === p.penghuni_id) || null,
     })).sort((a, b) => b.tahun - a.tahun || b.bulan - a.bulan || b.id - a.id);
+  },
+
+  updateStatusPembayaran: (id, status = 'Lunas') => {
+    let list = JSON.parse(localStorage.getItem(STORAGE_KEYS.PEMBAYARAN) || '[]');
+    list = list.map(p => {
+      if (p.id === Number(id)) {
+        return {
+          ...p,
+          status,
+          tanggal_bayar: status === 'Lunas' ? new Date().toISOString().split('T')[0] : null,
+        };
+      }
+      return p;
+    });
+    localStorage.setItem(STORAGE_KEYS.PEMBAYARAN, JSON.stringify(list));
   },
 
   addPembayaranBulk: (data) => {

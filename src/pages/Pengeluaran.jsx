@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Receipt,
   PlusCircle,
@@ -28,14 +28,14 @@ export default function Pengeluaran() {
     tanggal: new Date().toISOString().split('T')[0],
   });
 
-  useEffect(() => {
-    loadData();
-  }, [selectedBulan, selectedTahun]);
-
-  const loadData = () => {
+  const loadData = useCallback(() => {
     const list = StorageService.getPengeluaran(selectedBulan, selectedTahun);
     setPengeluaranList(list);
-  };
+  }, [selectedBulan, selectedTahun]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const handleOpenModal = () => {
     setFormData({
@@ -116,7 +116,19 @@ export default function Pengeluaran() {
           />
         </div>
 
-        <div className="flex items-center gap-3 w-full sm:w-auto">
+        <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+          <div className="flex items-center gap-2">
+            <label className="text-xs font-semibold text-slate-500">Tahun:</label>
+            <select
+              value={selectedTahun}
+              onChange={(e) => setSelectedTahun(Number(e.target.value))}
+              className="bg-slate-50 border border-slate-300/80 text-slate-800 text-xs rounded-xl px-3 py-1.5 focus:ring-2 focus:ring-slate-900 outline-none font-semibold"
+            >
+              <option value={2026}>2026</option>
+              <option value={2025}>2025</option>
+            </select>
+          </div>
+
           <div className="flex items-center gap-2">
             <label className="text-xs font-semibold text-slate-500">Bulan:</label>
             <select

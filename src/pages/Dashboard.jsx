@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Building2,
@@ -70,11 +70,7 @@ export default function Dashboard() {
   const [payModal, setPayModal] = useState(false);
   const [targetPayGroup, setTargetPayGroup] = useState(null);
 
-  useEffect(() => {
-    loadData();
-  }, [tahun, selectedBulan]);
-
-  const loadData = () => {
+  const loadData = useCallback(() => {
     const lap = StorageService.getLaporan(tahun);
     const rmh = StorageService.getRumah();
     const payments = StorageService.getPembayaran(selectedBulan, tahun);
@@ -113,7 +109,11 @@ export default function Dashboard() {
     setLaporanData(lap);
     setListRumah(rmh);
     setUnpaidList(groupedUnpaid);
-  };
+  }, [tahun, selectedBulan]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const handleOpenQuickPay = (group) => {
     setTargetPayGroup(group);
