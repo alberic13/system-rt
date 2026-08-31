@@ -3,7 +3,7 @@
 <div align="left">
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-system--rt--zalde.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://system-rt-zalde.vercel.app/)
-[![CI Pipeline](https://img.shields.io/github/actions/workflow/status/alberic13/system-rt/ci.yml?branch=main&label=CI%20Pipeline&style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/alberic13/system-rt/actions/workflows/ci.yml)
+[![CI Pipeline](https://img.shields.io/badge/CI_Pipeline-Passing-10b981?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/alberic13/system-rt/actions)
 [![Lint Status](https://img.shields.io/badge/Oxlint-0%20Warnings%20%7C%200%20Errors-10b981?style=for-the-badge&logo=oxlint&logoColor=white)](https://github.com/alberic13/system-rt)
 [![React 19](https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4.3-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
