@@ -31,7 +31,17 @@ export default function App() {
         </main>
         <footer className="border-t border-slate-200/80 bg-white py-6 text-center text-xs text-slate-500">
           <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>© {new Date().getFullYear()} System-RT Perumahan Zalde</p>
+            <p>
+              © {new Date().getFullYear()} System-RT Developed by{" "}
+              <a
+                href="https://github.com/alberic13"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-slate-800 transition-colors"
+              >
+                Muchammad Zalde Zahwa Putra
+              </a>
+            </p>
             <p className="flex items-center gap-2 font-medium">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               Sistem Pembayaran & Administrasi Terintegrasi
