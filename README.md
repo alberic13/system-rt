@@ -173,4 +173,4 @@ Buka browser di: `http://localhost:5173` atau port aktif yang ditampilkan.
 | **Build Production (Vite)** | ✅ **Passed** | Bundle terkompilasi dalam **984ms** tanpa error bundling. |
 | **CI/CD Pipeline** | ✅ **Active** | GitHub Actions Workflow (`.github/workflows/ci.yml`) otomatis memvalidasi lint & build di setiap push/PR. |
 | **Live Deployment** | ✅ **Online** | [system-rt-zalde.vercel.app](https://system-rt-zalde.vercel.app/) |
-| **Runtime Browser Test** | ✅ **Passed** | 0 JS console errors & 0 runtime exception pada seluruh 6 rute navigasi.. |
+| **Runtime Browser Test** | ✅ **Passed** | 0 JS console errors & 0 runtime exception pada seluruh 6 rute navigasi. |
